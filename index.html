@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listing Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="tabs">
+            <button @click="showProducts('Men')">Men</button>
+            <button @click="showProducts('Women')">Women</button>
+            <button @click="showProducts('Kids')">Kids</button>
+        </div>
+
+        <div class="product-cards">
+            <div v-for="product in filteredProducts" :key="product.id" class="product-cards">
+                <div v-for="pro in product.category_products" :key="pro.id" class="product-card">
+                    <img :src="pro.image" alt="Product Image">
+                    <span class="badge">{{ pro.badge_text }}</span>
+                    <h3 class="title">{{ pro.title }}</h3>
+                    <p class="vendor">Vendor: {{ pro.vendor }}</p>
+                    <p class="price">Price: ${{ pro.price }}</p>
+                    <p class="compare-price">Compare at Price: ${{ pro.compareAtPrice }}</p>
+                    <p class="discount">Discount: {{ calculateDiscount(pro.price, pro.compareAtPrice) }}% Off
+                    </p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
